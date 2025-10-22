@@ -1,0 +1,9 @@
+{
+	"name": "logisticsDataAdf",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "613e2092-9f41-4e3b-8e39-8737a66dfb4b",
+		"tenantId": "d0b87d3f-78a4-44f6-93f8-68dd02a06bcc"
+	}
+}
