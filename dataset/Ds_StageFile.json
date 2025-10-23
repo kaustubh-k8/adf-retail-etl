@@ -1,0 +1,41 @@
+{
+	"name": "Ds_StageFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_LS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ds_par_stageContainer": {
+				"type": "string"
+			},
+			"ds_par_stageFolder": {
+				"type": "string"
+			},
+			"ds_par_stageFile": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().ds_par_stageFile",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().ds_par_stageFolder",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().ds_par_stageContainer",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

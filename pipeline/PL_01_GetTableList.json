@@ -1,0 +1,100 @@
+{
+	"name": "PL_01_GetTableList",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupTableMapping",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[METADATA].[GET_TABLE_MAPPING]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_AzureSqlDb",
+						"type": "DatasetReference",
+						"parameters": {
+							"TargetTable": "TestValue"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Iterate Table  List",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupTableMapping",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupTableMapping').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Execute Loadstage Pipeline",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "PL_02_LoadStage",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"pl_par_SourceSchema": {
+										"value": "@item().SOURCE_SCHEMA\r\n",
+										"type": "Expression"
+									},
+									"pl_par_SourceTable": {
+										"value": "@item().SOURCE_TABLE\r\n",
+										"type": "Expression"
+									},
+									"pl_par_StageContainer": {
+										"value": "@item().STAGE_CONTAINER\r\n",
+										"type": "Expression"
+									},
+									"pl_par_StageFolder": {
+										"value": "@item().STAGE_FOLDER_PATH\r\n",
+										"type": "Expression"
+									},
+									"pl_par_StageFile": {
+										"value": "@item().STAGE_FILE_NAME\r\n",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "PROJECT 2"
+		},
+		"annotations": []
+	}
+}
