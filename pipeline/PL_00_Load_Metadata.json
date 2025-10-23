@@ -38,7 +38,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "DELETE FROM METADATA@{item().TargetTable}",
+										"value": "DELETE FROM METADATA.@{item().TargetTable}",
 										"type": "Expression"
 									},
 									"writeBehavior": "insert",
