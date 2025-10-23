@@ -1,0 +1,23 @@
+{
+	"name": "PL_02_LoadStage",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute LoadStage Pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "PROJECT 2"
+		},
+		"annotations": []
+	}
+}
