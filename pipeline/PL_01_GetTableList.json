@@ -87,6 +87,35 @@
 									}
 								}
 							}
+						},
+						{
+							"name": "Execute Load Database",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Execute Loadstage Pipeline",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "PL_03_ LoadDatabase",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"pl_par_SourceTable": {
+										"value": "@item().SOURCE_TABLE\n",
+										"type": "Expression"
+									}
+								}
+							}
 						}
 					]
 				}
