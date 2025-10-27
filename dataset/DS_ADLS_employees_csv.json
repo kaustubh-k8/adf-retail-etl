@@ -1,0 +1,28 @@
+{
+	"name": "DS_ADLS_employees_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_LS",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "OnPremToCloud"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "landing",
+				"fileSystem": "datalake"
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": null,
+			"compressionLevel": "Optimal",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

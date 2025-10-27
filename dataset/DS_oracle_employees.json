@@ -1,0 +1,19 @@
+{
+	"name": "DS_oracle_employees",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Oracle_xe_onPremises",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "OnPremToCloud"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HR",
+			"table": "EMPLOYEES"
+		}
+	}
+}
